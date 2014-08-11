@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+</head>
+
+<body ng-app="myapp">
+
+<div ng-controller="MyController" >
+  <form>
+    <label>First name</label>
+    <input type="text" name="firstName" ng-model="myForm.firstName"> <br />
+    <label>Last name</label>
+    <input type="text" name="lastName"  ng-model="myForm.lastName"><br/>
+
+    <label>Signed Agreement: </label>
+    <input type="checkbox" ng-model="myForm.signedAgreement" ><br />
+    <label>Wants Newsletter: </label>
+    <input type="checkbox" ng-model="myForm.wantNewsletter" ng-true-value="yes" ng-false-value="no" ><br />
+
+    <fieldset>
+      <label>Daily: </label><input type="radio" ng-model="myForm.subscriptionType" value="daily">
+      <label>Weekly: </label><input type="radio" ng-model="myForm.subscriptionType" value="weekly">
+      <label>Monthly: </label><input type="radio" ng-model="myForm.subscriptionType" value="monthly">
+    </fieldset>
+
+    <!-- dropdown to select a car model -->
+    <!-- build options from code passed to ng-options -->
+    <!-- optionBinding expression   dataSource expression -->
+    <select ng-model="myForm.car" ng-options="car.id as car.name group by car.type for car in myForm.carOptions">
+      <option value="">Select a Car</option>
+    </select>
+
+  </form>
+
+  <hr>
+
+  <div>
+    <p>Name: {{myForm.firstName}} {{myForm.lastName}}</p>
+    <p>Signed Agreement: {{myForm.signedAgreement}}</p>
+    <p>Want Newsletter: {{myForm.wantNewsletter}}</p>
+    <p>Subscription Type: {{myForm.subscriptionType}}</p>
+    <p>Car Model: {{myForm.car}}</p>
+  </div>
+</div>
+
+<script>
+  angular.module("myapp", [])
+    .controller("MyController", function($scope) {
+      $scope.myForm = {};
+      $scope.myForm.firstName = "Jakob";
+      $scope.myForm.lastName  = "Jenkov";
+      $scope.myForm.signedAgreement  = false;
+      $scope.myForm.wantNewsletter  = "yes";
+      $scope.myForm.subscriptionType  = "weekly";
+      $scope.myForm.car = "";
+      $scope.myForm.carOptions = [
+        {id: 'nissan', name: 'Nissan', type: 'foreign' },
+        {id: 'toyota', name: 'Toyota', type: 'foreign'  },
+        {id: 'fiat', name: 'Fiat', type: 'foreign' },
+        {id: 'ford', name: 'Ford', type: 'domestic' },
+        {id: 'gm', name: 'GM', type: 'domestic' }
+      ];
+    });
+</script>
+
+</body>
+</html>
