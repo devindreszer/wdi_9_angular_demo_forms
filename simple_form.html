@@ -20,8 +20,17 @@
     <!-- validate names have between 2 and 15 characters -->
     <!-- first and last name are required -->
     <input type="text" ng-class="myForm.getFormFieldCssClass(myFormNg.firstName)" name="firstName" ng-model="myForm.firstName" ng-minlength="2" ng-maxlength="15" ng-required> <br />
+
+    <div ng-show="myFormNg.firstName.$invalid">
+      <p>You must enter a valid first name (2 to 15 characters).</p>
+    </div>
+
     <label>Last name</label>
     <input type="text" ng-class="myForm.getFormFieldCssClass(myFormNg.lastName)" name="lastName"  ng-model="myForm.lastName" ng-minlength="2" ng-maxlength="15" ng-required><br/>
+
+    <div ng-show="myFormNg.lastName.$invalid">
+      <p>You must enter a valid first name (2 to 15 characters).</p>
+    </div>
 
     <label>Age</label>
     <!-- ng-pattern to guarantee a number -->
